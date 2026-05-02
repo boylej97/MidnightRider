@@ -1,68 +1,62 @@
-# 🏍️ Midnight Rider — Website
+# 🏍️ Midnight Rider — Official Website
 
-Scotland’s roads. Two wheels. No limits.
+> Scotland's roads. Two wheels. No limits.
 
-## Folder Structure
+Welcome to the official website of **Midnight Rider** — a Scottish motorcyclist and content creator tearing up roads across Scotland and beyond. This site is the home base for everything: ride content, photo galleries, social links, and more.
 
-```
-midnight-rider/
-├── index.html      ← Main page
-├── style.css       ← All styling
-├── script.js       ← Cursor, scroll effects, animations
-├── images/         ← Create this folder and add your photos here
-└── README.md       ← This file
-```
+---
 
-## Getting Started in VS Code
+## 🏴󠁧󠁢󠁳󠁣󠁴󠁿 About Midnight Rider
 
-1. Open the `midnight-rider` folder in VS Code
-1. Install the **Live Server** extension (by Ritwick Dey)
-1. Right-click `index.html` → **Open with Live Server**
-1. Your site opens in the browser and auto-refreshes when you save!
+Midnight Rider is a Scottish motorcyclist and content creator based in Scotland. From the sweeping passes of the Highlands to the tight coastal bends of the NC500, every ride is captured and shared with the world.
 
-## Adding Your Own Images (Gallery)
+Content goes out across two platforms:
 
-1. Create an `images/` folder inside `midnight-rider/`
-1. Drop your photos in (e.g. `ride1.jpg`, `highland.jpg`)
-1. In `index.html`, find the gallery section and replace:
+- **TikTok** — short-form ride clips, route highlights, gear takes, and real road moments
+- **Instagram** — photography from the saddle, scenic stops, and behind-the-scenes shots
 
-```html
-<!-- BEFORE (placeholder) -->
-<div class="gallery-item tall">
-  <div class="gallery-placeholder">
-    <span>🏔️</span>
-    <p>Highland Pass</p>
-  </div>
-</div>
+No scripts. No filter. Just the road, the machine, and the moment.
 
-<!-- AFTER (real image) -->
-<div class="gallery-item tall">
-  <img src="images/highland.jpg" alt="Highland pass" />
-</div>
-```
+---
 
-## Updating Your Social Links
+## 🌐 What the Website Covers
 
-In `index.html`, search for `@midnightrider` and replace with your actual usernames.
-Also update the `href` links on the social cards.
+| Section | Description |
+|---|---|
+| **Hero** | Bold intro — who Midnight Rider is and what this is all about |
+| **About** | The story behind the rider, where the journey started, and what drives it |
+| **Content** | Breakdown of TikTok and Instagram content, ride types, and gear reviews |
+| **Gallery** | Photo journal from the road — Scottish scenery, bikes, and pit stops |
+| **Connect** | Direct links to TikTok and Instagram, plus collab and partnership info |
 
-## Sections
+---
 
-|Section|What it is                    |
-|-------|------------------------------|
-|Hero   |Big intro with your name      |
-|About  |Bio + stats boxes             |
-|Content|TikTok, Instagram, ride types |
-|Gallery|Your photos (add real images!)|
-|Connect|Social links + contact note   |
+## 🚧 Upcoming Updates
 
-## Colours (CSS Variables in style.css)
+The website is actively being built out. Here's what's coming:
 
-```css
---amber:  #e8a020   ← Main accent colour
---white:  #f0ece4   ← Text
---chrome: #b0b0b0   ← Secondary text
---black:  #080808   ← Background
-```
+### 🔜 Coming Soon
+- [ ] **Real photo gallery** — replacing placeholders with actual ride photography
+- [ ] **Route Map** — interactive map of completed Scottish routes (NC500, Glencoe, Loch Lomond, etc.)
+- [ ] **Gear Reviews page** — dedicated section for honest kit reviews tested on Scottish roads
+- [ ] **Latest Videos section** — embedded TikTok feed pulling in the most recent content
+- [ ] **Mobile nav menu** — hamburger menu for small screens (nav links currently hidden on mobile)
 
-Change `--amber` to any colour to retheme the whole site instantly.
+### 🛠️ In Progress
+- [ ] Connecting real TikTok and Instagram profile links
+- [ ] Adding real photography to the gallery section
+- [ ] Writing full About section copy with the actual rider backstory
+
+### ✅ Completed
+- [x] Site structure and layout (Hero, About, Content, Gallery, Connect, Footer)
+- [x] Dark cinematic design with Scottish biker aesthetic
+- [x] Custom animated cursor
+- [x] Scroll reveal animations
+- [x] Responsive layout for tablet and mobile
+- [x] Animated road lines and amber accent theme
+- [x] Social cards for TikTok and Instagram
+
+---
+
+## 📁 File Structure
+
