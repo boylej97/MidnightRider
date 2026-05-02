@@ -84,6 +84,36 @@ rootMargin: ‘0px 0px -40px 0px’
 
 revealTargets.forEach(el => revealObserver.observe(el));
 
+/* — HAMBURGER MENU — */
+const hamburger   = document.getElementById(‘hamburger’);
+const mobileMenu  = document.getElementById(‘mobileMenu’);
+const mobileClose = document.getElementById(‘mobileClose’);
+
+function openMenu() {
+mobileMenu.classList.add(‘open’);
+hamburger.classList.add(‘open’);
+document.body.style.overflow = ‘hidden’; // prevent scroll behind menu
+}
+
+function closeMenu() {
+mobileMenu.classList.remove(‘open’);
+hamburger.classList.remove(‘open’);
+document.body.style.overflow = ‘’;
+}
+
+hamburger.addEventListener(‘click’, openMenu);
+mobileClose.addEventListener(‘click’, closeMenu);
+
+// Close when a mobile nav link is clicked
+document.querySelectorAll(’.mobile-links a’).forEach(link => {
+link.addEventListener(‘click’, closeMenu);
+});
+
+// Close on background tap (if somehow clicking outside)
+mobileMenu.addEventListener(‘click’, (e) => {
+if (e.target === mobileMenu) closeMenu();
+});
+
 /* — SMOOTH ANCHOR SCROLL (override for nav links) — */
 document.querySelectorAll(‘a[href^=”#”]’).forEach(link => {
 link.addEventListener(‘click’, (e) => {
