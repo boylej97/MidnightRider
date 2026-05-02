@@ -148,8 +148,137 @@ nav.scrolled {
   transform: scaleX(1);
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
 .nav-flag {
   font-size: 1.4rem;
+}
+
+/* --- HAMBURGER BUTTON --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 4px;
+  z-index: 600;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--chrome);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--amber);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--amber);
+}
+
+/* --- MOBILE MENU OVERLAY --- */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 6, 0.98);
+  z-index: 550;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.8rem;
+  background: none;
+  border: none;
+  color: var(--chrome);
+  font-size: 1.4rem;
+  cursor: none;
+  transition: color 0.2s;
+}
+
+.mobile-close:hover { color: var(--amber); }
+
+.mobile-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: 3rem;
+}
+
+.mobile-links li {
+  overflow: hidden;
+}
+
+.mobile-links a {
+  display: block;
+  font-family: 'Black Ops One', cursive;
+  font-size: clamp(2.5rem, 10vw, 4rem);
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  transition: color 0.2s ease, letter-spacing 0.3s ease;
+}
+
+.mobile-links a:hover {
+  color: var(--amber);
+  letter-spacing: 0.12em;
+}
+
+.mobile-socials {
+  display: flex;
+  gap: 2rem;
+}
+
+.mobile-socials a {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--chrome);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-socials a:hover { color: var(--amber); }
+
+.mobile-flag {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 1.8rem;
 }
 
 /* ============================================
@@ -528,6 +657,81 @@ nav.scrolled {
 }
 
 /* ============================================
+   TIKTOK VIDEOS SECTION
+   ============================================ */
+.videos-section {
+  padding: 8rem 3rem;
+  background: var(--black);
+}
+
+.videos-sub {
+  color: var(--chrome);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.tiktok-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-bottom: 3rem;
+}
+
+.tiktok-embed-wrap {
+  background: var(--iron);
+  min-height: 560px;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+.tiktok-embed-wrap blockquote,
+.tiktok-embed-wrap iframe {
+  width: 100% !important;
+  min-height: 560px !important;
+}
+
+.tiktok-placeholder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  border: 1px dashed rgba(232,160,32,0.2);
+  text-align: center;
+}
+
+.tt-icon {
+  color: var(--amber);
+  opacity: 0.6;
+}
+
+.tt-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--chrome);
+}
+
+.tt-hint {
+  font-size: 0.78rem;
+  color: rgba(176,176,176,0.5);
+  letter-spacing: 0.05em;
+}
+
+.videos-cta {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* ============================================
    GALLERY
    ============================================ */
 .gallery-section {
@@ -775,7 +979,9 @@ footer {
    ============================================ */
 @media (max-width: 900px) {
   nav { padding: 1.2rem 1.5rem; }
-  .nav-links { gap: 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
   .hero { padding: 0 1.5rem 5rem; }
 
   .about {
@@ -786,20 +992,22 @@ footer {
 
   .content-grid { grid-template-columns: 1fr; }
 
+  .tiktok-grid { grid-template-columns: 1fr; }
+  .tiktok-embed-wrap { min-height: 500px; }
+
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-item.tall  { grid-row: span 1; }
   .gallery-item.wide  { grid-column: span 1; }
 
   .connect-section,
   .content-section,
+  .videos-section,
   .gallery-section { padding: 5rem 1.5rem; }
 
   .social-card { padding: 1.5rem; }
 }
 
 @media (max-width: 600px) {
-  .nav-links { display: none; }
-
   .hero-cta {
     flex-direction: column;
     gap: 0.8rem;
