@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mini Factory</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>MINI FACTORY</h1>
+    <div id="stats">Tick: <span id="tick">0</span></div>
+  </header>
+
+  <div id="layout">
+    <aside id="toolbar">
+      <h3>Buildings</h3>
+      <div class="tool" data-tool="miner"><span class="key">1</span> Miner</div>
+      <div class="tool" data-tool="belt"><span class="key">2</span> Belt</div>
+      <div class="tool" data-tool="furnace"><span class="key">3</span> Furnace</div>
+      <div class="tool" data-tool="assembler"><span class="key">4</span> Assembler</div>
+      <div class="tool" data-tool="chest"><span class="key">5</span> Chest</div>
+      <div class="tool" data-tool="remove"><span class="key">X</span> Remove</div>
+
+      <p class="hint">
+        Click a building, click the grid to place.<br/>
+        <b>R</b> rotates &middot; <b>right-click</b> deletes &middot; <b>Esc</b> back to belt
+      </p>
+
+      <button id="reset">Reset map</button>
+
+      <h3>Legend</h3>
+      <ul class="legend">
+        <li><span class="swatch ore"></span> Iron ore patch</li>
+        <li><span class="swatch grass"></span> Grass</li>
+        <li><span class="dot orange"></span> Iron ore</li>
+        <li><span class="dot silver"></span> Iron plate</li>
+        <li><span class="dot gold"></span> Iron gear</li>
+      </ul>
+
+      <h3>Recipes</h3>
+      <ul class="recipes">
+        <li>Miner on ore &rarr; iron ore (1s)</li>
+        <li>Furnace: 1 ore &rarr; 1 plate (2s)</li>
+        <li>Assembler: 2 plates &rarr; 1 gear (3s)</li>
+      </ul>
+    </aside>
+
+    <main>
+      <canvas id="game" width="960" height="640"></canvas>
+      <div id="info">&nbsp;</div>
+    </main>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
