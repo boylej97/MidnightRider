@@ -7,15 +7,43 @@ A small Factorio-inspired factory builder. Java HTTP server simulates the world;
 - JDK 11 or newer (`javac` and `java` on your PATH)
 - A modern browser
 
-## Run
+## Run locally
 
 ```
 ./run.sh
 ```
 
-Then open <http://localhost:8080>.
+Then open <http://localhost:8080>. Different port: `./run.sh 9000`, or `PORT=9000 java Server`.
 
-A different port: `./run.sh 9000`.
+## Deploy from GitHub
+
+The repo ships a `Dockerfile` so it'll run on anything that builds containers from a GitHub repo. The server honors `$PORT` for the platforms that inject one.
+
+### Render (free tier, one click)
+
+1. Push this repo to GitHub.
+2. Go to <https://render.com/> → **New +** → **Blueprint** → point it at this repo.
+3. Render reads `render.yaml`, picks up the `Dockerfile`, builds, and deploys. You get a `https://<name>.onrender.com` URL.
+
+Notes: the free Render web tier sleeps after 15 minutes of inactivity. When it wakes up, the in-memory world resets — fine for a demo, not a save file. The whole site is also a single shared world; everyone visiting the URL edits the same factory.
+
+### Fly.io
+
+```
+fly launch          # detects the Dockerfile, generates fly.toml
+fly deploy
+```
+
+### Railway / Koyeb / any Docker host
+
+Connect the GitHub repo. They'll auto-detect the `Dockerfile`. No env vars needed; `PORT` is read automatically if the platform sets it.
+
+### Build the image yourself
+
+```
+docker build -t mini-factory .
+docker run -p 8080:8080 mini-factory
+```
 
 ## How to play
 

@@ -1,0 +1,11 @@
+.git
+.gitignore
+.github
+README.md
+*.class
+out/
+build/
+.idea/
+.vscode/
+*.iml
+run.sh
