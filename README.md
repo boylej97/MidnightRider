@@ -1,62 +1,66 @@
-# 🏍️ Midnight Rider — Official Website
+# Mini Factory
 
-> Scotland's roads. Two wheels. No limits.
+A small Factorio-inspired factory builder. Java HTTP server simulates the world; the browser draws it.
 
-Welcome to the official website of **Midnight Rider** — a Scottish motorcyclist and content creator tearing up roads across Scotland and beyond. This site is the home base for everything: ride content, photo galleries, social links, and more.
+## Requirements
 
----
+- JDK 11 or newer (`javac` and `java` on your PATH)
+- A modern browser
 
-## 🏴󠁧󠁢󠁳󠁣󠁴󠁿 About Midnight Rider
+## Run
 
-Midnight Rider is a Scottish motorcyclist and content creator based in Scotland. From the sweeping passes of the Highlands to the tight coastal bends of the NC500, every ride is captured and shared with the world.
+```
+./run.sh
+```
 
-Content goes out across two platforms:
+Then open <http://localhost:8080>.
 
-- **TikTok** — short-form ride clips, route highlights, gear takes, and real road moments
-- **Instagram** — photography from the saddle, scenic stops, and behind-the-scenes shots
+A different port: `./run.sh 9000`.
 
-No scripts. No filter. Just the road, the machine, and the moment.
+## How to play
 
----
+Pick a building from the toolbar (or press `1`–`5`), then click on the grid to place it. Press `R` to rotate before placing — the arrow on each building shows its output direction. Right-click (or pick **Remove** / press `X`) to delete a building.
 
-## 🌐 What the Website Covers
+### Buildings
 
-| Section | Description |
-|---|---|
-| **Hero** | Bold intro — who Midnight Rider is and what this is all about |
-| **About** | The story behind the rider, where the journey started, and what drives it |
-| **Content** | Breakdown of TikTok and Instagram content, ride types, and gear reviews |
-| **Gallery** | Photo journal from the road — Scottish scenery, bikes, and pit stops |
-| **Connect** | Direct links to TikTok and Instagram, plus collab and partnership info |
+| Building   | What it does                                                                |
+|------------|-----------------------------------------------------------------------------|
+| Miner      | Place on an ore patch. Produces 1 iron ore every 1s into the tile in front. |
+| Belt       | Carries one item forward per tick. Chain them to route resources.           |
+| Furnace    | Takes iron ore, produces 1 iron plate every 2s.                             |
+| Assembler  | Takes 2 iron plates, produces 1 iron gear every 3s.                         |
+| Chest      | Accepts anything pushed into it. Total count shown in the corner.           |
 
----
+### A starter line
 
-## 🚧 Upcoming Updates
+1. Place a **Miner** on the brown ore patch, arrow pointing at an empty tile.
+2. Place a **Belt** in front of it, also pointing forward.
+3. Add more belts, then a **Chest** at the end.
+4. Watch iron ore pile up.
 
-The website is actively being built out. Here's what's coming:
+To smelt: put a **Furnace** in the path so the belt feeds into it, with another belt coming out the other side carrying plates onward. An **Assembler** at the end will turn 2 plates into 1 gear.
 
-### 🔜 Coming Soon
-- [ ] **Real photo gallery** — replacing placeholders with actual ride photography
-- [ ] **Route Map** — interactive map of completed Scottish routes (NC500, Glencoe, Loch Lomond, etc.)
-- [ ] **Gear Reviews page** — dedicated section for honest kit reviews tested on Scottish roads
-- [ ] **Latest Videos section** — embedded TikTok feed pulling in the most recent content
-- [ ] **Mobile nav menu** — hamburger menu for small screens (nav links currently hidden on mobile)
+## Architecture
 
-### 🛠️ In Progress
-- [ ] Connecting real TikTok and Instagram profile links
-- [ ] Adding real photography to the gallery section
-- [ ] Writing full About section copy with the actual rider backstory
+```
+Server.java   — single-file Java HTTP server, game state, and tick loop (10 Hz)
+web/
+  index.html  — page layout
+  script.js   — canvas rendering, input, polls /api/state
+  style.css   — dark theme
+```
 
-### ✅ Completed
-- [x] Site structure and layout (Hero, About, Content, Gallery, Connect, Footer)
-- [x] Dark cinematic design with Scottish biker aesthetic
-- [x] Custom animated cursor
-- [x] Scroll reveal animations
-- [x] Responsive layout for tablet and mobile
-- [x] Animated road lines and amber accent theme
-- [x] Social cards for TikTok and Instagram
+### API
 
----
+- `GET  /api/state` — full world JSON (ground, buildings, items on belts)
+- `POST /api/place` — body `{"x":int,"y":int,"type":string,"dir":0..3}` (0=N,1=E,2=S,3=W)
+- `POST /api/remove` — body `{"x":int,"y":int}`
+- `POST /api/reset` — clears all buildings
 
-## 📁 File Structure
+### Tick model
 
+Each tick (100 ms) runs three phases:
+
+1. **preTick** — producers (miner / furnace / assembler) advance their progress and may queue a pending output.
+2. **Belt movement** — every belt that has an item tries to push it to the tile in front. A belt that has already moved or received this tick can't move again; the loop iterates until no more moves are possible, which gives smooth flow even on long lines while still capping each item at 1 tile per tick.
+3. **postTick** — producers try to drop their pending output onto the tile they're facing.

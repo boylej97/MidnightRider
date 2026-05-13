@@ -1,0 +1,159 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #181818;
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #0f0f0f;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #f0a020;
+}
+
+#stats {
+  font-size: 12px;
+  color: #888;
+  font-family: monospace;
+}
+
+#layout {
+  display: flex;
+  align-items: flex-start;
+}
+
+#toolbar {
+  width: 240px;
+  padding: 16px;
+  background: #0f0f0f;
+  border-right: 1px solid #2a2a2a;
+  height: calc(100vh - 51px);
+  overflow-y: auto;
+}
+
+#toolbar h3 {
+  margin: 16px 0 6px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #888;
+  text-transform: uppercase;
+}
+#toolbar h3:first-child { margin-top: 0; }
+
+.tool {
+  padding: 8px 12px;
+  margin: 4px 0;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  font-size: 13px;
+}
+.tool:hover { background: #262626; }
+.tool.active {
+  background: #f0a020;
+  color: #0a0a0a;
+  border-color: #f0a020;
+  font-weight: 600;
+}
+
+.key {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  background: #2a2a2a;
+  border-radius: 3px;
+  font-size: 11px;
+  font-family: monospace;
+  font-weight: bold;
+  color: #ccc;
+}
+.tool.active .key { background: rgba(0,0,0,0.25); color: #fff; }
+
+.hint {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+button#reset {
+  width: 100%;
+  padding: 8px;
+  background: #2a1818;
+  color: #d88;
+  border: 1px solid #4a2828;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+button#reset:hover { background: #3a2020; color: #faa; }
+
+ul.legend, ul.recipes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+ul.legend li {
+  padding: 3px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #bbb;
+}
+ul.recipes li {
+  padding: 2px 0;
+  color: #aaa;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 2px; }
+.swatch.ore   { background: #8b6914; }
+.swatch.grass { background: #2a3a1a; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.dot.orange { background: #d77a2e; }
+.dot.silver { background: #c0c0c0; }
+.dot.gold   { background: #e8c050; }
+
+main {
+  padding: 16px;
+}
+canvas {
+  display: block;
+  background: #1a2a1a;
+  border: 1px solid #2a2a2a;
+  cursor: crosshair;
+  image-rendering: pixelated;
+}
+
+#info {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  min-height: 24px;
+  font-size: 12px;
+  color: #aaa;
+  font-family: monospace;
+}
